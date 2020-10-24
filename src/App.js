@@ -72,7 +72,7 @@ function roundColor(){
 }
 
 
-return colors[Math.round( roundColor() / 10) * 10] || colors.base;
+return colors[Math.round( roundColor() / 10) * 10];
 
 }
 
