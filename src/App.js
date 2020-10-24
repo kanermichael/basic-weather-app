@@ -113,7 +113,7 @@ function GetInfo({location, color}){
     async function getWeather(){
 
       try{
-       const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`)
+       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`)
        setWeatherData(response.data.main)
        color(response.data.main.temp)
        setStatus('success')
