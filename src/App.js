@@ -41,10 +41,9 @@ function roundColor(){
   }
 }
 
-return colors[Math.round( roundColor() / 10) * 10];
+return colors[Math.round(roundColor() / 10) * 10];
 
 }
-
 
 function App() {
 
