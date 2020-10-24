@@ -57,11 +57,10 @@ function App() {
       <section>
         <Title>Weather App</Title>
         <SearchForm onLocationChange={setLocation}  />
-        <GetInfo location={location} setColorHash={setWeatherColor}/>
+        <GetInfo location={location} setColorHash={setWeatherColor}/> 
       </section>
     </Wrapper>
    </React.Fragment>
-   
   );
 }
 
