@@ -3,7 +3,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Openweathermap API required
 
-To use this basic weather application you will need an API key from : [https://openweathermap.org/]https://openweathermap.org/
+To use this basic weather application you will need an API key from : [https://openweathermap.org/](https://openweathermap.org/)
 
 - add the API key to your local .env as REACT_APP_WEATHER_API_KEY
 
