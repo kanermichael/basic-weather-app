@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useWeather} from '../context/WeatherContext'
 
 const Input = styled.input`
   display: block;
@@ -27,20 +28,21 @@ const Submit = styled.input`
 `;
 
 
-export default function SearchForm({onLocationChange}){
+export default function SearchForm(){
 
     const [text, setText] = React.useState('')
+    const {setLocation} = useWeather()
   
     function handleSubmit(e){
       e.preventDefault();
       if(text){
-        onLocationChange(text)
+        setLocation(text)
       } 
     }
   
     return (
       <form onSubmit={handleSubmit}>
-        <Input type="text" onChange={e => setText(e.target.value)} autoFocus/>
+        <Input type="text" onChange={e => setText(e.target.value)} autoFocus value={text}/>
         <Submit
               type="submit"
               value="Search"

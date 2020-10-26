@@ -9,14 +9,14 @@ const WeatherOutput = styled.h2`
   font-weight: 300;
 `;
 
-export default function GetInfo({location, setColorHash}){
+export default function GetInfo(){
    
-   const {status, weatherData} = useFetch(location, setColorHash)
+    const {state} = useFetch()
 
     const statusMsg = {
         idle: "Please enter a location",
-        success: `Temperature: ${Math.round(weatherData.main?.temp)}°C, Clouds: ${weatherData.clouds?.all}%`,
-        invalid: "The location you have entered is not valid"
+        resolved: `Temperature: ${Math.round(state.data?.main.temp)}°C ,Clouds: ${state.data?.clouds.all}%`,
+        error: "The location you have entered is not valid"
     }
-    return <WeatherOutput>{statusMsg[status] || statusMsg.invalid}</WeatherOutput>    
+    return <WeatherOutput>{statusMsg[state.status] || statusMsg.error}</WeatherOutput>    
 }

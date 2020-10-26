@@ -1,37 +1,53 @@
 import React from 'react';
 import axios from 'axios';
 
-export default function useFetch (location, setColorHash){
+import {useWeather} from '../context/WeatherContext'
 
-    const [status, setStatus] = React.useState('idle')
-    const [weatherData, setWeatherData] = React.useState({})
-    
+
+export default function useFetch (){
+
+    const {location, setWeatherColor} = useWeather()
+
+    function weatherReducer(state, action){
+        const type = {
+            resolved: {status: 'resolved', data: action.data, error: null},
+            error: {status: 'error', data: null, error: action.error},
+        }
+        return type[action.type]
+    }
+
+    const [state, dispatch] = React.useReducer(weatherReducer, {
+        status: 'idle',
+        data: null,
+    })
+
+    const mountedRef = React.useRef(false) 
+
     React.useEffect(()=>{
 
-        let isCancelled = false;
-
+        mountedRef.current = true
+        
         async function getWeather(){
             if(location){
                 try{
                     const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.REACT_APP_WEATHER_API_KEY}&units=metric`)
-                    if (!isCancelled) {
-                        setWeatherData(response.data)
-                        setColorHash(response.data.main.temp)
-                        setStatus('success')
+                    if (mountedRef.current) {
+                        const {data} = response
+                        dispatch({type: 'resolved', data})
+                        setWeatherColor(data.main?.temp)
                     }
                 }catch(e){
-                    if (!isCancelled) {
-                        setStatus('error') 
+                    if (mountedRef.current) {
+                        dispatch({ type: 'error', error: e})
                     } 
                 }
             }
-           
         }
         getWeather()
         return () => {
-            isCancelled = true;
+            mountedRef.current = false
           };
-    }, [location, setColorHash])
+    }, [location, setWeatherColor])
    
-    return {status, weatherData}
+    return {state}
 }
