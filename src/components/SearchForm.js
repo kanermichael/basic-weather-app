@@ -13,6 +13,7 @@ const Input = styled.input`
   outline: 1px solid #ccc;
   margin-bottom: 20px;
   border-radius: 3px;
+  text-align: center;
 `;
 
 const Submit = styled.input`

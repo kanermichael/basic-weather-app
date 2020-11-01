@@ -6,19 +6,34 @@ import {useWeather} from '../context/WeatherContext'
 
 
 const Title = styled.h1`
-  font-size: 3em;
+  font-size: 2em;
   text-align: center;
   color: #000;
+  margin-top:0;
 `;
 
 const InnerWrapper = styled.section`
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: ${ ({color}) => handleWithHashMap(color)};
-  transition: background-color 0.5s ease;
+
+background-color: ${ ({color}) => handleWithHashMap(color)};
+background-image: ${ ({background}) => `url(${(background)})`};
+background-repeat: no-repeat;
+background-size: cover;
+
+transition: background-color 0.5s ease;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+text-align: center;
+ 
+`;
+
+const Section = styled.section`
+  background: white;
+  padding: 20px 30px;
+  border-radius:5px;
+  box-shadow: 10px 10px 24px -15px rgba(0,0,0,0.75);
 `;
 
 
@@ -46,15 +61,15 @@ return colors[Math.round(roundColor() / 10) * 10];
 
 
 export default function Wrapper(){
-    const {weatherColor} = useWeather()
+    const {backgroundImage, weatherColor} = useWeather()
 
     return (
-        <InnerWrapper color={weatherColor}>
-        <section>
-        <Title>Weather App</Title>
+        <InnerWrapper color={weatherColor} background={backgroundImage}>
+        <Section>
+            <Title>Weather Forecast</Title>
             <SearchForm />
-            <GetInfo/> 
-        </section>
+        </Section>
+        <GetInfo/> 
       </InnerWrapper>
     )
 }
