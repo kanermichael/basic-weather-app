@@ -7,7 +7,6 @@ function WeatherProvider(props){
   const [location, setLocation] = React.useState('')
   const [weatherColor, setWeatherColor] = React.useState(null)
   const [backgroundImage, setBackgroundImage] = React.useState('')
-  
   const value = {location, setLocation, weatherColor, setWeatherColor, backgroundImage, setBackgroundImage}
 
   return(
